@@ -32,6 +32,50 @@ class _AddNotesScreenState extends State<AddNotesScreen> {
         appBar: AppBar(
           title: Text("Add Notes"),
           centerTitle: true,
+          actions: [
+            IconButton(
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    return const AlertDialog(
+                      content: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          ListTile(
+                            leading: Text("1"),
+                            title: Text("Open Insert Screen\nCommand => new note"),
+                          ),
+                          ListTile(
+                            leading: Text("2"),
+                            title: Text("Insert Data\nCommand => add Note"),
+                          ),
+                          ListTile(
+                            leading: Text("3"),
+                            title: Text("To Add Title\nCommand => add Title"),
+                          ),
+                          ListTile(
+                            leading: Text("4"),
+                            title: Text("To Add Notes\nCommand => add Note"),
+                          ),
+                          ListTile(
+                            leading: Text("5"),
+                            title: Text("To Save Note\nCommand => save Note"),
+                          ),
+                          ListTile(
+                            leading: Text("5"),
+                            title: Text("To Delete Note\nCommand => delete note id = ?"),
+                          ),
+
+                        ],
+                      ),
+                    );
+                  },
+                );
+              },
+              icon: const Icon(Icons.help),
+            ),
+          ],
         ),
         body: SingleChildScrollView(
           child: Padding(
@@ -137,12 +181,13 @@ class _AddNotesScreenState extends State<AddNotesScreen> {
             if (textString.toLowerCase().contains("add title") && value.confidence > 0) {
 
               txtTitle = TextEditingController(text: textString.substring(9));
-            }else if (textString.toLowerCase().contains("add notes") && value.confidence > 0) {
+            }else if (textString.toLowerCase().contains("add note") && value.confidence > 0) {
 
               txtNotes = TextEditingController(text: textString.substring(8));
-            }else if (textString.toLowerCase().contains("save notes") && value.confidence > 0) {
+            }else if (textString.toLowerCase().contains("save note") && value.confidence > 0) {
 
               DbHelper.helper.insertData(NotesModel(title: txtTitle.text,notes: txtNotes.text,date: "${DateTime.now()}",time: "${TimeOfDay.now()}"));
+              Navigator.pop(context);
             }
             // var a = textString.toLowerCase().similarityTo("hii i note");
             // print("============= $a");

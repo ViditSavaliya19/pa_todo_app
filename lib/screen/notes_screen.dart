@@ -34,6 +34,50 @@ class _NotesScreenState extends State<NotesScreen> {
       appBar: AppBar(
         title: Text("Notes"),
         centerTitle: true,
+        actions: [
+          IconButton(
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (context) {
+                  return const AlertDialog(
+                    content: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        ListTile(
+                          leading: Text("1"),
+                          title: Text("Open Insert Screen\nCommand => new note"),
+                        ),
+                        ListTile(
+                          leading: Text("2"),
+                          title: Text("Insert Data\nCommand => add Note"),
+                        ),
+                        ListTile(
+                          leading: Text("3"),
+                          title: Text("To Add Title\nCommand => add Title"),
+                        ),
+                        ListTile(
+                          leading: Text("4"),
+                          title: Text("To Add Notes\nCommand => add Note"),
+                        ),
+                        ListTile(
+                          leading: Text("5"),
+                          title: Text("To Save Note\nCommand => save Note"),
+                        ),
+                        ListTile(
+                          leading: Text("5"),
+                          title: Text("To Delete Note\nCommand => delete note id = ?"),
+                        ),
+
+                      ],
+                    ),
+                  );
+                },
+              );
+            },
+            icon: const Icon(Icons.help),
+          ),
+        ],
       ),
       body: GridView.builder(
         gridDelegate:
